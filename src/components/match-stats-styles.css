@@ -1,0 +1,627 @@
+/* ============================================================
+   MATCH STATS TAB — CHARTS STYLES
+   Dark theme — matches tailwind.config palette
+   neutral-50 = rgb(24,24,24) | neutral-200 = rgb(37,37,37)
+   brand-600  = rgb(0,145,255) | success-600 = rgb(70,167,88)
+   error-600  = rgb(229,72,77) | subtext    = rgb(163,163,163)
+   ============================================================ */
+
+/* ── Section wrapper ──────────────────────────────────────── */
+
+.ms-section {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+.ms-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.ms-section-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgb(250, 250, 250);
+  font-family: 'Rubik', sans-serif;
+}
+
+.ms-section-badge {
+  font-size: 0.6875rem;
+  color: rgb(163, 163, 163);
+  background: rgb(36, 36, 36);
+  padding: 0.125rem 0.625rem;
+  border-radius: 999px;
+}
+
+/* ── Chart card ───────────────────────────────────────────── */
+
+.ms-chart-card {
+  background: rgb(24, 24, 24);
+  border: 1px solid rgb(37, 37, 37);
+  border-radius: 0.5rem;
+  padding: 1rem 1.125rem;
+}
+
+.ms-chart-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  gap: 0.5rem;
+}
+
+.ms-chart-card-title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: rgb(250, 250, 250);
+  font-family: 'Rubik', sans-serif;
+  line-height: 1.3;
+}
+
+.ms-chart-card-subtitle {
+  font-size: 0.6875rem;
+  color: rgb(163, 163, 163);
+  margin-top: 0.125rem;
+  display: block;
+}
+
+/* ── Grid layouts ─────────────────────────────────────────── */
+
+.ms-charts-row {
+  display: grid;
+  gap: 1rem;
+}
+
+.ms-charts-row-2-1 {
+  grid-template-columns: 2fr 1fr;
+}
+
+.ms-charts-row-1-1 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.ms-charts-row-1-1-1 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+@media (max-width: 900px) {
+  .ms-charts-row-2-1,
+  .ms-charts-row-1-1,
+  .ms-charts-row-1-1-1 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Chart legend ─────────────────────────────────────────── */
+
+.ms-chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.875rem;
+  margin-bottom: 0.75rem;
+}
+
+.ms-chart-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.ms-chart-legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.ms-chart-legend-label {
+  font-size: 0.6875rem;
+  color: rgb(163, 163, 163);
+  font-family: 'Rubik', sans-serif;
+}
+
+/* ── Big KPI ──────────────────────────────────────────────── */
+
+.ms-kpi-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 0 0.25rem;
+}
+
+.ms-kpi-big {
+  font-size: 3rem;
+  font-weight: 700;
+  color: rgb(0, 145, 255);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-family: 'Rubik', sans-serif;
+}
+
+.ms-kpi-unit {
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgb(82, 82, 82);
+  margin-left: 2px;
+}
+
+.ms-kpi-label {
+  font-size: 0.6875rem;
+  color: rgb(163, 163, 163);
+  margin-top: 0.25rem;
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+.ms-kpi-trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  padding: 0.125rem 0.5rem;
+  border-radius: 999px;
+  margin-bottom: 0.5rem;
+}
+
+.ms-kpi-trend-up {
+  color: rgb(70, 167, 88);
+  background: rgb(22, 48, 29);
+}
+
+.ms-kpi-divider {
+  width: 100%;
+  height: 1px;
+  background: rgb(37, 37, 37);
+  margin: 0.75rem 0;
+}
+
+.ms-kpi-stat-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3rem 0;
+  font-size: 0.75rem;
+}
+
+.ms-kpi-stat-label {
+  color: rgb(163, 163, 163);
+}
+
+.ms-kpi-stat-value {
+  font-weight: 600;
+  color: rgb(250, 250, 250);
+}
+
+/* ── Sparkline wrapper ────────────────────────────────────── */
+
+.ms-sparkline-label {
+  font-size: 0.6875rem;
+  color: rgb(163, 163, 163);
+  text-align: center;
+  margin-bottom: 0.25rem;
+}
+
+/* ── Recharts global overrides (scoped) ───────────────────── */
+
+.ms-chart-card .recharts-cartesian-grid-horizontal line,
+.ms-chart-card .recharts-cartesian-grid-vertical line {
+  stroke: rgb(37, 37, 37);
+}
+
+.ms-chart-card .recharts-text {
+  fill: rgb(163, 163, 163);
+  font-size: 11px;
+  font-family: 'Rubik', sans-serif;
+}
+
+.ms-chart-card .recharts-polar-angle-axis-tick text {
+  fill: rgb(163, 163, 163);
+  font-size: 11px;
+  font-family: 'Rubik', sans-serif;
+}
+
+.ms-chart-card .recharts-polar-grid-angle line,
+.ms-chart-card .recharts-polar-grid-concentric-polygon {
+  stroke: rgb(48, 48, 48);
+}
+
+.ms-chart-card .recharts-radar {
+  fill-opacity: 0.18;
+}
+
+/* ── Discipline result dot row ────────────────────────────── */
+
+.ms-result-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 0.5625rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.ms-result-dot-W { background: rgb(22, 48, 29); color: rgb(70, 167, 88); }
+.ms-result-dot-L { background: rgb(60, 24, 26); color: rgb(229, 72, 77); }
+.ms-result-dot-D { background: rgb(48, 48, 48); color: rgb(163, 163, 163); }
+
+/* ── Donut center label ───────────────────────────────────── */
+
+.ms-donut-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.ms-donut-center-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: rgb(250, 250, 250);
+  line-height: 1;
+  font-family: 'Rubik', sans-serif;
+}
+
+.ms-donut-center-label {
+  font-size: 0.625rem;
+  color: rgb(163, 163, 163);
+  margin-top: 0.125rem;
+  font-family: 'Rubik', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.ms-donut-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Status breakdown list ────────────────────────────────── */
+
+.ms-status-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.ms-status-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.375rem 0.5rem;
+  border-radius: 0.375rem;
+  background: rgb(30, 30, 30);
+}
+
+.ms-status-item-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ms-status-item-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.ms-status-item-label {
+  font-size: 0.75rem;
+  color: rgb(200, 200, 200);
+  font-family: 'Rubik', sans-serif;
+}
+
+.ms-status-item-value {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: rgb(250, 250, 250);
+  font-family: 'Rubik', sans-serif;
+}
+
+.ms-status-item-pct {
+  font-size: 0.6875rem;
+  color: rgb(163, 163, 163);
+  margin-left: 0.375rem;
+}
+
+/* ── Status tag in table ──────────────────────────────────── */
+
+.ms-status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.625rem;
+  font-weight: 600;
+  font-family: 'Rubik', sans-serif;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.ms-status-tag-titulaire {
+  background: rgba(0, 145, 255, 0.12);
+  color: rgb(0, 145, 255);
+}
+
+.ms-status-tag-remplacant {
+  background: rgba(251, 191, 36, 0.12);
+  color: rgb(251, 191, 36);
+}
+
+.ms-status-tag-non_entre {
+  background: rgba(163, 163, 163, 0.1);
+  color: rgb(130, 130, 130);
+}
+
+.ms-status-tag-non_convoque {
+  background: rgba(229, 72, 77, 0.1);
+  color: rgb(180, 80, 83);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   GLOBAL FILTER BAR
+   ══════════════════════════════════════════════════════════════ */
+
+.ms-filter-bar {
+  background: rgb(20, 20, 20);
+  border: 1px solid rgb(37, 37, 37);
+  border-radius: 0.625rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.ms-filter-bar-inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.ms-filter-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.ms-filter-bar-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgb(200, 200, 200);
+  font-family: 'Rubik', sans-serif;
+}
+
+.ms-filter-active-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgb(0, 145, 255);
+  color: rgb(255, 255, 255);
+  font-size: 0.625rem;
+  font-weight: 700;
+  font-family: 'Rubik', sans-serif;
+}
+
+.ms-filter-groups {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.ms-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ms-filter-group-label {
+  font-size: 0.6875rem;
+  color: rgb(120, 120, 120);
+  font-family: 'Rubik', sans-serif;
+  font-weight: 500;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
+.ms-filter-divider {
+  width: 1px;
+  height: 24px;
+  background: rgb(48, 48, 48);
+  flex-shrink: 0;
+}
+
+/* ── Pill buttons ─────────────────────────────────────────── */
+
+.ms-pill-group {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.ms-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.625rem;
+  border-radius: 999px;
+  border: 1px solid rgb(48, 48, 48);
+  background: transparent;
+  color: rgb(163, 163, 163);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  font-family: 'Rubik', sans-serif;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.ms-pill-btn:hover {
+  border-color: rgb(80, 80, 80);
+  color: rgb(220, 220, 220);
+  background: rgb(30, 30, 30);
+}
+
+.ms-pill-btn-active {
+  background: rgba(0, 145, 255, 0.12);
+  border-color: rgba(0, 145, 255, 0.3);
+  color: rgb(0, 145, 255);
+  font-weight: 600;
+}
+
+.ms-pill-btn-active:hover {
+  background: rgba(0, 145, 255, 0.18);
+  border-color: rgba(0, 145, 255, 0.4);
+  color: rgb(0, 145, 255);
+}
+
+/* ── Clear button ─────────────────────────────────────────── */
+
+.ms-filter-clear-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 999px;
+  border: 1px solid rgb(60, 24, 26);
+  background: rgba(229, 72, 77, 0.08);
+  color: rgb(229, 72, 77);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  font-family: 'Rubik', sans-serif;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.ms-filter-clear-btn:hover {
+  background: rgba(229, 72, 77, 0.15);
+  border-color: rgb(229, 72, 77);
+}
+
+/* ── Custom date range ────────────────────────────────────── */
+
+.ms-filter-custom-dates {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgb(37, 37, 37);
+}
+
+.ms-filter-date-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.ms-filter-date-label {
+  font-size: 0.625rem;
+  color: rgb(120, 120, 120);
+  font-family: 'Rubik', sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.ms-filter-date-input {
+  background: rgb(30, 30, 30);
+  border: 1px solid rgb(48, 48, 48);
+  border-radius: 0.375rem;
+  padding: 0.375rem 0.625rem;
+  color: rgb(220, 220, 220);
+  font-size: 0.75rem;
+  font-family: 'Rubik', sans-serif;
+  outline: none;
+  transition: border-color 0.15s ease;
+  color-scheme: dark;
+}
+
+.ms-filter-date-input:focus {
+  border-color: rgb(0, 145, 255);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   TABLE STATS SUMMARY STRIP
+   ══════════════════════════════════════════════════════════════ */
+
+.ms-table-stats-strip {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: rgb(20, 20, 20);
+  border: 1px solid rgb(37, 37, 37);
+  border-radius: 0.5rem 0.5rem 0 0;
+  padding: 0.625rem 0.75rem;
+  margin-bottom: 0;
+  overflow-x: auto;
+  border-bottom: none;
+}
+
+.ms-table-stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.125rem;
+  padding: 0 0.75rem;
+  min-width: 0;
+  flex-shrink: 0;
+}
+
+.ms-table-stat-value {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: rgb(250, 250, 250);
+  font-family: 'Rubik', sans-serif;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.ms-table-stat-label {
+  font-size: 0.5625rem;
+  color: rgb(120, 120, 120);
+  font-family: 'Rubik', sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.ms-table-stat-divider {
+  width: 1px;
+  height: 28px;
+  background: rgb(37, 37, 37);
+  flex-shrink: 0;
+}
+
+/* ── Make table border-radius play nice with strip ────────── */
+
+.ms-table-stats-strip + .border {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}

@@ -1,0 +1,62 @@
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Sidebar } from './components/Sidebar';
+import { MembersPage } from './components/MembersPage';
+import { FicheDePostePage } from './components/FicheDePostePage';
+import { ReglementsPage } from './components/ReglementsPage';
+import { MeetingsPage } from './components/MeetingsPage';
+import { CategoriesPage } from './components/CategoriesPage';
+import { OrganigramPage } from './components/OrganigramPage';
+import OrganigramTwoPage from './components/OrganigramTwoPage';
+import { TasksViewPage } from './components/TasksViewPage';
+import { ResourcesPage } from './components/ResourcesPage';
+import { ProjetPage } from './components/ProjetPage';
+import { ProjetLandingPage } from './components/ProjetLandingPage';
+import { OrganigramProvider } from './contexts/OrganigramContext';
+import { DocumentsHomePage } from './pages/DocumentsHomePage';
+import { DocumentEditorPage } from './pages/DocumentEditorPage';
+import { FicheDePosteEditorPage } from './pages/FicheDePosteEditorPage';
+import { FicheDePosteDetailPage } from './pages/FicheDePosteDetailPage';
+import ProfilesPage from './pages/ProfilesPage';
+import JoueursPage from './pages/JoueursPage';
+import U14JoueursPage from './pages/U14JoueursPage';
+import PlayerProfilePage from './pages/PlayerProfilePage';
+import CategoryDetailPage from './pages/CategoryDetailPage';
+import { AIChatWidget } from './components/chat/AIChatWidget';
+
+function App() {
+  return (
+    <Router>
+      <OrganigramProvider>
+        <div className="flex min-h-screen bg-default-background">
+          <Sidebar />
+          <Routes>
+            <Route path="/" element={<Navigate to="/planification" replace />} />
+            <Route path="/planification" element={<MeetingsPage />} />
+            <Route path="/profiles" element={<ProfilesPage />} />
+            <Route path="/joueurs" element={<JoueursPage />} />
+            <Route path="/joueurs-u14" element={<U14JoueursPage />} />
+            <Route path="/joueurs/:id" element={<PlayerProfilePage />} />
+            <Route path="/categories" element={<CategoriesPage />} />
+            <Route path="/categories/:slug" element={<CategoryDetailPage />} />
+            <Route path="/resources" element={<ResourcesPage />} />
+            <Route path="/projet" element={<ProjetLandingPage />} />
+            <Route path="/projet/:season" element={<ProjetPage />} />
+            <Route path="/organigram" element={<OrganigramPage />} />
+            <Route path="/organigram-two" element={<OrganigramTwoPage />} />
+            <Route path="/membres" element={<MembersPage />} />
+            <Route path="/fiche-poste" element={<FicheDePostePage />} />
+            <Route path="/fiche-poste/:id" element={<FicheDePosteDetailPage />} />
+            <Route path="/fiche-de-poste/create" element={<FicheDePosteEditorPage />} />
+            <Route path="/gestion-taches" element={<TasksViewPage />} />
+            <Route path="/reglements" element={<ReglementsPage />} />
+            <Route path="/documents" element={<DocumentsHomePage />} />
+            <Route path="/editor/:id" element={<DocumentEditorPage />} />
+          </Routes>
+          <AIChatWidget />
+        </div>
+      </OrganigramProvider>
+    </Router>
+  );
+}
+
+export default App;
