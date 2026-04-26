@@ -1,13 +1,11 @@
 import { Node, mergeAttributes } from '@tiptap/core';
 import { ReactNodeViewRenderer, NodeViewWrapper } from '@tiptap/react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
   Search, ChevronRight, X, Briefcase, BookOpen, FileText,
   Building2, GitBranch, CheckCircle2, Wrench, Target,
-  Plus, Trash2, Edit3, Save, XCircle, Loader2, Database,
+  Plus, Trash2, Edit3, Save, XCircle, Loader2,
 } from 'lucide-react';
-import { ficheService } from '../services/ficheService';
-import type { FicheDePoste } from '../types/supabase';
 
 type FicheStatus = 'Active' | 'Archived';
 type ViewMode = 'pdf' | 'standard';
@@ -135,17 +133,6 @@ const SAMPLE_FICHES: FicheDePosteData[] = [
   },
 ];
 
-const convertDbFicheToLocal = (fiche: FicheDePoste): FicheDePosteData => ({
-  id: fiche.id,
-  jobTitle: fiche.job_title,
-  department: fiche.department,
-  reportsTo: fiche.reports_to,
-  status: fiche.status as FicheStatus,
-  workConditions: fiche.work_conditions,
-  mainMissions: fiche.main_missions,
-  requiredSkills: fiche.required_skills,
-  isDefault: false,
-});
 
 const STATUS_CONFIG: Record<FicheStatus, { label: string; bg: string; text: string; border: string }> = {
   Active:   { label: 'Actif',    bg: '#f0fdf4', text: '#166534', border: '#bbf7d0' },
@@ -364,24 +351,9 @@ const SelectionModal = ({
   onCreateNew: () => void;
 }) => {
   const [search, setSearch] = useState('');
-  const [dbFiches, setDbFiches] = useState<FicheDePosteData[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const isLoading = false;
 
-  useEffect(() => {
-    const loadFiches = async () => {
-      try {
-        const fiches = await ficheService.getAll();
-        setDbFiches(fiches.map(convertDbFicheToLocal));
-      } catch (error) {
-        console.error('Failed to load fiches:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    loadFiches();
-  }, []);
-
-  const allFiches = [...SAMPLE_FICHES, ...dbFiches];
+  const allFiches = [...SAMPLE_FICHES];
   const filtered = allFiches.filter(
     (f) => !search || f.jobTitle.toLowerCase().includes(search.toLowerCase()) || f.department.toLowerCase().includes(search.toLowerCase()),
   );
@@ -439,13 +411,6 @@ const SelectionModal = ({
             <>
               {visible.length === 0 && <div style={{ padding: '32px', textAlign: 'center', color: '#9ca3af', fontSize: '13px' }}>Aucun poste trouvé</div>}
 
-              {dbFiches.length > 0 && !search && !selDept && (
-                <div style={{ padding: '12px 22px 8px', display: 'flex', alignItems: 'center', gap: '6px', background: '#f9fafb', borderBottom: '1px solid #e5e7eb' }}>
-                  <Database size={12} style={{ color: '#6b7280' }} />
-                  <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6b7280', fontFamily: "'Arial', sans-serif" }}>Vos fiches personnalisées</span>
-                </div>
-              )}
-
               {visible.filter(f => !f.isDefault).map((f) => {
                 const accent = getAccent(f.department);
                 const sc = STATUS_CONFIG[f.status];
@@ -474,7 +439,7 @@ const SelectionModal = ({
               })}
 
               {SAMPLE_FICHES.some(f => visible.includes(f)) && !search && !selDept && (
-                <div style={{ padding: '12px 22px 8px', display: 'flex', alignItems: 'center', gap: '6px', background: '#f9fafb', borderBottom: '1px solid #e5e7eb', marginTop: dbFiches.length > 0 ? '8px' : '0' }}>
+                <div style={{ padding: '12px 22px 8px', display: 'flex', alignItems: 'center', gap: '6px', background: '#f9fafb', borderBottom: '1px solid #e5e7eb', marginTop: '0' }}>
                   <FileText size={12} style={{ color: '#6b7280' }} />
                   <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6b7280', fontFamily: "'Arial', sans-serif" }}>Modèles par défaut</span>
                 </div>
@@ -646,38 +611,7 @@ const FicheDePosteBlockComponent = ({ node, updateAttributes }: any) => {
 
   const handleSelect = (f: FicheDePosteData) => { applyFiche(f); setShowSelectModal(false); };
 
-  const handleSave = async (f: FicheDePosteData, saveToDb?: boolean) => {
-    if (saveToDb) {
-      try {
-        if (typeof f.id === 'string' && !f.id.startsWith('default-')) {
-          await ficheService.update({
-            id: f.id,
-            job_title: f.jobTitle,
-            department: f.department,
-            reports_to: f.reportsTo,
-            status: f.status,
-            work_conditions: f.workConditions,
-            main_missions: f.mainMissions,
-            required_skills: f.requiredSkills,
-          });
-        } else {
-          const created = await ficheService.create({
-            job_title: f.jobTitle,
-            department: f.department,
-            reports_to: f.reportsTo,
-            status: f.status,
-            work_conditions: f.workConditions,
-            main_missions: f.mainMissions,
-            required_skills: f.requiredSkills,
-          });
-          f.id = created.id;
-        }
-      } catch (error) {
-        console.error('Failed to save fiche to database:', error);
-        alert('Erreur lors de la sauvegarde dans la base de données');
-        return;
-      }
-    }
+  const handleSave = (f: FicheDePosteData) => {
     applyFiche(f);
     setShowEditModal(false);
     setShowCreateModal(false);
@@ -723,7 +657,6 @@ const FicheDePosteBlockComponent = ({ node, updateAttributes }: any) => {
           initial={currentData}
           onSave={handleSave}
           onClose={() => setShowEditModal(false)}
-          allowSaveToDb={true}
         />
       )}
       {showCreateModal && (
@@ -734,7 +667,6 @@ const FicheDePosteBlockComponent = ({ node, updateAttributes }: any) => {
             setShowCreateModal(false);
             setShowSelectModal(true);
           }}
-          allowSaveToDb={true}
         />
       )}
 
